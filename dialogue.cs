@@ -12,7 +12,8 @@ public class Dialogue : MonoBehaviour
     public float textSpeed;
     private int index;
     private AudioSource audio;
-    List<char> listPause = new List<char> { ',', '.','!','?' };
+    private static bool buttonclicked = false;
+    List<char> listPause = new List<char> { ',', '.','?' };
     void Start()
     {
         speakerNameComponent.text = speakers[index];
@@ -23,7 +24,8 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+      
+        if (buttonclicked)
         {
             if (textComponent.text == lines[index])
             {
@@ -36,6 +38,7 @@ public class Dialogue : MonoBehaviour
                 textComponent.text = lines[index];
          
             }
+        buttonclicked = false;
         }
     }
 
@@ -111,6 +114,14 @@ IEnumerator TypeLine()
 textComponent.text = lines[index];
 }
 
+public void OnButtonClick(){
+    ButtonClick();
+    Debug.Log("Has Clicked");
+}
+void ButtonClick(){
+    Debug.Log(buttonclicked);
+    buttonclicked = true;
+}
 
 
    void NextLine()
